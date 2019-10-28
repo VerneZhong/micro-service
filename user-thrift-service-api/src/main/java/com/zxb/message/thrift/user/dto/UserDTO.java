@@ -1,5 +1,6 @@
-package com.zxb.user.dto;
+package com.zxb.message.thrift.user.dto;
 
+import com.zxb.message.thrift.user.util.JsonUtil;
 import lombok.Data;
 
 /**
@@ -17,4 +18,9 @@ public class UserDTO {
     private String realName;
     private String mobile;
     private String email;
+
+    @Override
+    public String toString() {
+        return JsonUtil.toJson(this);
+    }
 }

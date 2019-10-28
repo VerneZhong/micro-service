@@ -2,8 +2,8 @@ package com.zxb.user.controller;
 
 import com.zxb.message.thrift.user.UserInfo;
 import com.zxb.message.thrift.user.UserService;
+import com.zxb.message.thrift.user.dto.UserDTO;
 import com.zxb.user.config.RedisClient;
-import com.zxb.user.dto.UserDTO;
 import com.zxb.user.exception.LoginException;
 import com.zxb.user.request.RegisterUserRequest;
 import com.zxb.user.response.Response;
@@ -14,11 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.thrift.TException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import static com.zxb.user.response.Response.MOBILE_OR_EMAIL_REQUIRED;
@@ -30,7 +29,8 @@ import static com.zxb.user.response.Response.USERNAME_PASSWORD_INVALID;
  * @author Mr.zxb
  * @date 2019-10-27 16:31
  */
-@RestController
+@Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -39,7 +39,13 @@ public class UserController {
     @Autowired
     private RedisClient redisClient;
 
+    @GetMapping("login")
+    public String login() {
+        return "login";
+    }
+
     @PostMapping("/login")
+    @ResponseBody
     public Response login(@RequestParam("username") String username,
                           @RequestParam("password") String password) {
         // 验证用户名和密码
@@ -69,6 +75,7 @@ public class UserController {
     }
 
     @PostMapping("/sendVerifyCode")
+    @ResponseBody
     public Response sendVerifyCode(@RequestParam(value = "mobile", required = false) String mobile,
                                    @RequestParam(value = "email", required = false) String email) {
         String code = TokenUtil.randomCode("0123456789", 6);
@@ -95,6 +102,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @ResponseBody
     public Response register(@RequestBody @Valid RegisterUserRequest userRequest) {
         if (StringUtils.isBlank(userRequest.getMobile()) && StringUtils.isBlank(userRequest.getEmail())) {
             return MOBILE_OR_EMAIL_REQUIRED;
@@ -121,6 +129,12 @@ public class UserController {
             return Response.exception(e);
         }
         return Response.success();
+    }
+
+    @PostMapping("/authentication")
+    @ResponseBody
+    public UserDTO authentication(@RequestHeader("token") String token) {
+        return (UserDTO) redisClient.get(token);
     }
 
 }

@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: user-edge-service
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
   redis:
     timeout: 30000
 thrift:
