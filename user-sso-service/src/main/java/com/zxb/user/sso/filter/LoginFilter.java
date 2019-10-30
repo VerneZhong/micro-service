@@ -69,7 +69,7 @@ public abstract class LoginFilter implements Filter {
             }
         }
         if (userDTO == null) {
-            response.sendRedirect("http://localhost:8082/user/login");
+            response.sendRedirect("http://localhost:8085/user/login");
             return;
         }
 
@@ -87,7 +87,7 @@ public abstract class LoginFilter implements Filter {
     protected abstract void login(HttpServletRequest request, HttpServletResponse response, UserDTO userDTO);
 
     private UserDTO requestUserInfo(String token) {
-        String url = "http://localhost:8082/user/authentication";
+        String url = "http://localhost:8085/user/authentication";
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost(url);
