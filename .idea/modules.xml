@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway-zuul/api-gateway-zuul.iml" filepath="$PROJECT_DIR$/api-gateway-zuul/api-gateway-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/course-dubbo-service/course-dubbo-service.iml" filepath="$PROJECT_DIR$/course-dubbo-service/course-dubbo-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/course-dubbo-service-api/course-dubbo-service-api.iml" filepath="$PROJECT_DIR$/course-dubbo-service-api/course-dubbo-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/course-edge-service/course-edge-service.iml" filepath="$PROJECT_DIR$/course-edge-service/course-edge-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/message-thrift-service/message-thrift-service.iml" filepath="$PROJECT_DIR$/message-thrift-service/message-thrift-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/message-thrift-service-api/message-thrift-service-api.iml" filepath="$PROJECT_DIR$/message-thrift-service-api/message-thrift-service-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-service.iml" filepath="$PROJECT_DIR$/micro-service.iml" />

@@ -15,6 +15,10 @@
         <module>message-thrift-service</module>
         <module>user-edge-service</module>
         <module>user-sso-service</module>
+        <module>course-dubbo-service-api</module>
+        <module>course-dubbo-service</module>
+        <module>course-edge-service</module>
+        <module>api-gateway-zuul</module>
     </modules>
 
 
@@ -31,14 +35,43 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
         <thrift.version>0.12.0</thrift.version>
+        <dubbo-spring-boot.version>2.0.0</dubbo-spring-boot.version>
+        <zookeeper.version>3.5.6</zookeeper.version>
+        <zkclient.version>0.11</zkclient.version>
+        <user-thrift-service-api.version>1.0-SNAPSHOT</user-thrift-service-api.version>
+        <course-dubbo-service-api.version>1.0-SNAPSHOT</course-dubbo-service-api.version>
+        <user-sso-service.version>1.0-SNAPSHOT</user-sso-service.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
                 <version>${thrift.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zxb</groupId>
+                <artifactId>user-thrift-service-api</artifactId>
+                <version>${user-thrift-service-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zxb</groupId>
+                <artifactId>course-dubbo-service-api</artifactId>
+                <version>${course-dubbo-service-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zxb</groupId>
+                <artifactId>user-sso-service</artifactId>
+                <version>${user-sso-service.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

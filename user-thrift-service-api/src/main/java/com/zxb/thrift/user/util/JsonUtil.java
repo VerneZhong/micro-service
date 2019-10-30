@@ -1,4 +1,4 @@
-package com.zxb.message.thrift.user.util;
+package com.zxb.thrift.user.util;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;

@@ -1,16 +1,17 @@
 package com.zxb.user.service;
 
-import com.zxb.message.thrift.user.UserInfo;
-import com.zxb.message.thrift.user.UserService;
+import com.zxb.thrift.user.UserInfo;
+import com.zxb.thrift.user.UserService;
+import com.zxb.thrift.user.dto.TeacherDTO;
 import com.zxb.user.entity.User;
 import com.zxb.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TException;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -31,6 +32,21 @@ public class UserServiceImpl implements UserService.Iface {
         Optional<User> userOptional = userRepository.findById(id);
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userOptional.get(), userInfo);
+        return userInfo;
+    }
+
+    @Override
+    public UserInfo getTeacherById(int id) throws TException {
+        Map map = userRepository.queryByTeacherById(id);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId((Integer) map.get("id"));
+        userInfo.setUsername((String) map.get("username"));
+        userInfo.setPassword((String) map.get("password"));
+        userInfo.setRealName((String) map.get("realname"));
+        userInfo.setMobile((String) map.get("mobile"));
+        userInfo.setEmail((String) map.get("email"));
+        userInfo.setIntro((String) map.get("intro"));
+        userInfo.setStars((Integer) map.get("stars"));
         return userInfo;
     }
 

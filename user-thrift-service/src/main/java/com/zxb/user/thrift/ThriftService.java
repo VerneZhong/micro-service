@@ -1,6 +1,6 @@
 package com.zxb.user.thrift;
 
-import com.zxb.message.thrift.user.UserService;
+import com.zxb.thrift.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;

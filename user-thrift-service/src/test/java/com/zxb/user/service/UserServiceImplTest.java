@@ -1,9 +1,8 @@
 package com.zxb.user.service;
-import com.zxb.message.thrift.user.UserInfo._Fields;
 
 
-import com.zxb.message.thrift.user.UserInfo;
-import com.zxb.message.thrift.user.UserService;
+import com.zxb.thrift.user.UserInfo;
+import com.zxb.thrift.user.UserService;
 import com.zxb.user.entity.User;
 import com.zxb.user.repository.UserRepository;
 import org.apache.thrift.TException;

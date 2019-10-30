@@ -1,8 +1,8 @@
 package com.zxb.user.controller;
 
-import com.zxb.message.thrift.user.UserInfo;
-import com.zxb.message.thrift.user.UserService;
-import com.zxb.message.thrift.user.dto.UserDTO;
+import com.zxb.thrift.user.UserInfo;
+import com.zxb.thrift.user.UserService;
+import com.zxb.thrift.user.dto.UserDTO;
 import com.zxb.user.config.RedisClient;
 import com.zxb.user.exception.LoginException;
 import com.zxb.user.request.RegisterUserRequest;

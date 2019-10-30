@@ -2,8 +2,8 @@ package com.zxb.user.sso.filter;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.zxb.message.thrift.user.dto.UserDTO;
-import com.zxb.message.thrift.user.util.JsonUtil;
+import com.zxb.thrift.user.dto.UserDTO;
+import com.zxb.thrift.user.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -48,9 +48,11 @@ public abstract class LoginFilter implements Filter {
         String token = request.getParameter("token");
         if (StringUtils.isBlank(token)) {
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equalsIgnoreCase(token)) {
-                    token = cookie.getValue();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equalsIgnoreCase(token)) {
+                        token = cookie.getValue();
+                    }
                 }
             }
         }
@@ -60,15 +62,16 @@ public abstract class LoginFilter implements Filter {
             userDTO = CACHE.getIfPresent(token);
             if (userDTO == null) {
                 userDTO = requestUserInfo(token);
+                if (userDTO != null) {
+                    // 存入缓存
+                    CACHE.put(token, userDTO);
+                }
             }
         }
         if (userDTO == null) {
             response.sendRedirect("http://localhost:8082/user/login");
             return;
         }
-
-        // 存入缓存
-        CACHE.put(token, userDTO);
 
         login(request, response, userDTO);
 

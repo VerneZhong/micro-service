@@ -1,6 +1,6 @@
-package com.zxb.message.thrift.user.dto;
+package com.zxb.thrift.user.dto;
 
-import com.zxb.message.thrift.user.util.JsonUtil;
+import com.zxb.thrift.user.util.JsonUtil;
 import lombok.Data;
 
 /**
