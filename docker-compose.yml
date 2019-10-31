@@ -1,0 +1,41 @@
+version: '3'
+# 运行docker配置
+# docker-compose up -d
+services:
+  zxb-user-thrift-service:
+    image: user-service:latest
+    command:
+      - "--mysql.address=192.168.1.119"
+  zxb-message-thrift-service:
+    image: message-service:latest
+
+  zxb-user-edge-service:
+    image: user-edge-service:latest
+    links:
+      - zxb-message-thrift-service
+      - zxb-user-thrift-service
+    command:
+      - "--redis.address=192.168.1.119"
+
+  zxb-course-dubbo-service:
+    image: course-dubbo-service:latest
+    links:
+      - zxb-user-thrift-service
+    command:
+      - "--mysql.address=192.168.1.119"
+      - "--zookeeper.address=192.168.1.119"
+
+  zxb-course-edge-service:
+    image: course-edge-service:latest
+    links:
+      - zxb-user-edge-service
+    command:
+      - "--zookeeper.address=192.168.1.119"
+
+  zxb-api-gateway-zuul:
+    image: api-gateway-zuul:latest
+    links:
+      - zxb-user-edge-service
+      - zxb-course-edge-service
+    ports:
+      - 8085:8085

@@ -15,6 +15,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -28,7 +29,7 @@ import java.net.UnknownHostException;
  */
 @Component
 @Slf4j
-public class ThriftService implements ApplicationRunner {
+public class ThriftService {
 
     @Value("${server.port}")
     private int serverPort;
@@ -36,11 +37,12 @@ public class ThriftService implements ApplicationRunner {
     @Autowired
     private UserService.Iface userService;
 
-    public void startThriftServer() throws TTransportException, UnknownHostException {
+    @PostConstruct
+    public void startThriftServer() throws TTransportException {
         TProcessor processor = new UserService.Processor<>(userService);
-        InetAddress localHost = Inet4Address.getLocalHost();
-        InetSocketAddress inetSocketAddress = new InetSocketAddress(localHost.getHostAddress(), serverPort);
-        TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(inetSocketAddress);
+//        InetAddress localHost = Inet4Address.getLocalHost();
+//        InetSocketAddress inetSocketAddress = new InetSocketAddress(localHost.getHostAddress(), serverPort);
+        TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(serverPort);
 
         TNonblockingServer.Args args = new TNonblockingServer.Args(serverSocket);
         args.processor(processor);
@@ -53,8 +55,4 @@ public class ThriftService implements ApplicationRunner {
         tServer.serve();
     }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        startThriftServer();
-    }
 }

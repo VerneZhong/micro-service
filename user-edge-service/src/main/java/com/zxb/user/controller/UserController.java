@@ -39,7 +39,7 @@ public class UserController {
     @Autowired
     private RedisClient redisClient;
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }

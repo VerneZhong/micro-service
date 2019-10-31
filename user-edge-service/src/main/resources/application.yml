@@ -8,13 +8,15 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
   redis:
-    timeout: 30000
+    host: ${redis.address}
 thrift:
   user:
-    ip: 127.0.0.1
+#    ip: 127.0.0.1
+    ip: zxb-user-thrift-service
     port: 8080
   message:
-    ip: 127.0.0.1
+#    ip: 127.0.0.1
+    ip: zxb-message-thrift-service
     port: 8081
 
 cache:
