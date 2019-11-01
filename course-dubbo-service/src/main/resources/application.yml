@@ -30,4 +30,4 @@ thrift:
   user:
 #    ip: 127.0.0.1
     ip: zxb-user-thrift-service
-    port: 8080
+    port: 8079
