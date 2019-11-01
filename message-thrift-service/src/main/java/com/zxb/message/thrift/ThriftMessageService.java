@@ -1,5 +1,6 @@
 package com.zxb.message.thrift;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TNonblockingServer;
@@ -20,6 +21,7 @@ import javax.annotation.PostConstruct;
  * @date 2019-10-27 12:08
  */
 @Configuration
+@Slf4j
 public class ThriftMessageService {
 
     @Value("${server.port}")
@@ -31,21 +33,21 @@ public class ThriftMessageService {
     @PostConstruct
     public void startThriftServer() {
         TProcessor processor = new MessageService.Processor<>(messageService);
-        TNonblockingServerSocket serverSocket = null;
-
+        TNonblockingServerSocket serverSocket;
         try {
             serverSocket = new TNonblockingServerSocket(serverPort);
+            TNonblockingServer.Args args = new TNonblockingServer.Args(serverSocket);
+            args.processor(processor);
+
+            args.transportFactory(new TFramedTransport.Factory());
+            args.protocolFactory(new TBinaryProtocol.Factory());
+
+            TServer tServer = new TNonblockingServer(args);
+            log.info("message-thrift服务启动成功, 端口: {}", serverPort);
+            tServer.serve();
         } catch (TTransportException e) {
             e.printStackTrace();
+            log.error("message-thrift服务启动失败", e);
         }
-
-        TNonblockingServer.Args args = new TNonblockingServer.Args(serverSocket);
-        args.processor(processor);
-
-        args.transportFactory(new TFramedTransport.Factory());
-        args.protocolFactory(new TBinaryProtocol.Factory());
-
-        TServer tServer = new TNonblockingServer(args);
-        tServer.serve();
     }
 }

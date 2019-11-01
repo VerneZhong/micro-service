@@ -6,6 +6,7 @@ spring:
     username: root
     password: "@Wwindows8"
     url: jdbc:mysql://${mysql.address}:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
+#    url: jdbc:mysql://127.0.0.1:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
   jpa:
     show-sql: true
     hibernate:
@@ -16,3 +17,5 @@ spring:
         format_sql: true
 server:
   port: 8080
+thrift:
+  port: 8079

@@ -2,7 +2,6 @@ package com.zxb.user.service;
 
 import com.zxb.thrift.user.UserInfo;
 import com.zxb.thrift.user.UserService;
-import com.zxb.thrift.user.dto.TeacherDTO;
 import com.zxb.user.entity.User;
 import com.zxb.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;

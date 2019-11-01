@@ -122,8 +122,7 @@ public class UserController {
             UserInfo userInfo = new UserInfo();
             BeanUtils.copyProperties(userRequest, userInfo);
             userInfo.setPassword(MD5Util.md5(userRequest.getPassword()));
-            UserService.Client userService = serviceProvider.getUserService();
-            userService.registerUser(userInfo);
+            serviceProvider.getUserService().registerUser(userInfo);
         } catch (TException e) {
             e.printStackTrace();
             return Response.exception(e);

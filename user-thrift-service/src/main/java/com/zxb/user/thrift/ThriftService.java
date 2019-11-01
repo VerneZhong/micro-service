@@ -29,30 +29,39 @@ import java.net.UnknownHostException;
  */
 @Component
 @Slf4j
-public class ThriftService {
+public class ThriftService implements ApplicationRunner {
 
-    @Value("${server.port}")
+    @Value("${thrift.port}")
     private int serverPort;
 
     @Autowired
     private UserService.Iface userService;
 
-    @PostConstruct
-    public void startThriftServer() throws TTransportException {
-        TProcessor processor = new UserService.Processor<>(userService);
-//        InetAddress localHost = Inet4Address.getLocalHost();
-//        InetSocketAddress inetSocketAddress = new InetSocketAddress(localHost.getHostAddress(), serverPort);
-        TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(serverPort);
+//    @PostConstruct 会导致Thrift服务被阻塞堵死，出现Thrift client请求超时，不能占用server.port端口，
+    // 会出现端口冲突的问题，必须加地址 InetSocketAddress
+    public void startThriftServer() {
+        try {
+            TProcessor processor = new UserService.Processor<>(userService);
+            InetSocketAddress address = new InetSocketAddress(serverPort);
+            TNonblockingServerSocket serverSocket = new TNonblockingServerSocket(address);
+            TNonblockingServer.Args args = new TNonblockingServer.Args(serverSocket);
+            args.processor(processor);
 
-        TNonblockingServer.Args args = new TNonblockingServer.Args(serverSocket);
-        args.processor(processor);
+            args.transportFactory(new TFramedTransport.Factory());
+            args.protocolFactory(new TBinaryProtocol.Factory());
 
-        args.transportFactory(new TFramedTransport.Factory());
-        args.protocolFactory(new TBinaryProtocol.Factory());
+            TServer tServer = new TNonblockingServer(args);
+            log.info("User-ThriftService-启动成功，端口：{}", serverPort);
+            tServer.serve();
+        } catch (TTransportException e) {
+            e.printStackTrace();
+            log.info("User-ThriftService-启动失败，堆栈：{}", e.getMessage());
+        }
 
-        TServer tServer = new TNonblockingServer(args);
-        log.info("ThriftService-startThriftServer starting...");
-        tServer.serve();
     }
 
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        startThriftServer();
+    }
 }
