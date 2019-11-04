@@ -1,4 +1,4 @@
-FROM hub.c.163.com/library/java:latest
+FROM 192.168.1.137:8080/micro-service/java:latest
 MAINTAINER zhongxb zhongxuebin17180062@gmail.com
 
 COPY target/course-edge-service-1.0-SNAPSHOT.jar /course-edge-service.jar
