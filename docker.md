@@ -21,7 +21,7 @@ docker push localhost:5000/ubuntu
   # 设置镜像地址
   "registry-mirrors": ["http://hub-mirror.c.163.com"],
   # 设置http不安全的地址列表
-  "insecure-registries": ["192.168.1.137:8080"]
+  "insecure-registries": ["192.168.1.139:8080"]
 }
 之后，执行以下命令
 systemctl daemon-reload

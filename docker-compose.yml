@@ -1,5 +1,5 @@
 version: '3'
-# 运行docker配置
+# 运行docker配置，docker容器间服务发现 --links方式，需要在统一服务器才可行，分布式下无法使用
 # docker-compose up -d
 services:
   zxb-user-thrift-service:
