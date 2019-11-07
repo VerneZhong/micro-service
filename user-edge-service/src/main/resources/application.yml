@@ -8,15 +8,23 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
   redis:
-    host: ${redis.address}
+#    host: ${redis.address}
+    host: 192.168.1.119
 thrift:
   user:
-#    ip: 127.0.0.1
-    ip: zxb-user-thrift-service
-    port: 8080
+    #    ip: 127.0.0.1
+    # docker-compose 方式
+    #    ip: zxb-user-thrift-service
+    #    port: 8080
+    # marathon-lb
+    ip: lb.zxb.com
+    port: 8001
   message:
-#    ip: 127.0.0.1
-    ip: zxb-message-thrift-service
+    #    ip: 127.0.0.1
+    #    ip: zxb-message-thrift-service
+    #    port: 8081
+    # marathon-lb
+    ip: lb.zxb.com
     port: 8081
 
 cache:

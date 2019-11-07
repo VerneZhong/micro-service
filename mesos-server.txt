@@ -1,0 +1,5 @@
+thrift.user.service=8001
+thrift.message.service=8081
+user.edge.service=8003
+course.edge.service=8004
+api.gateway.api.service=8085

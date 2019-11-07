@@ -5,8 +5,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: "@Wwindows8"
-    url: jdbc:mysql://${mysql.address}:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
-#    url: jdbc:mysql://127.0.0.1:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
+#    url: jdbc:mysql://${mysql.address}:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
+    url: jdbc:mysql://192.168.1.119:3306/db_user?characterEncoding=utf-8&serverTimezone=GMT
   jpa:
     show-sql: true
     hibernate:
@@ -18,4 +18,4 @@ spring:
 server:
   port: 8080
 thrift:
-  port: 8079
+  port: 8001

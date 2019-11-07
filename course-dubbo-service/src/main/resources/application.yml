@@ -5,7 +5,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: "@Wwindows8"
-    url: jdbc:mysql://${mysql.address}:3306/db_course?characterEncoding=utf-8&serverTimezone=GMT
+#    url: jdbc:mysql://${mysql.address}:3306/db_course?characterEncoding=utf-8&serverTimezone=GMT
+    url: jdbc:mysql://192.168.1.119:3306/db_course?characterEncoding=utf-8&serverTimezone=GMT
   jpa:
     show-sql: true
     hibernate:
@@ -19,7 +20,8 @@ spring:
     application:
       name: course-provider-service
     registry:
-      address: zookeeper://${zookeeper.address}:2181
+#      address: zookeeper://${zookeeper.address}:2181
+      address: zookeeper://192.168.1.119:2181
     protocol:
       port: 20880
 
@@ -29,5 +31,7 @@ server:
 thrift:
   user:
 #    ip: 127.0.0.1
-    ip: zxb-user-thrift-service
-    port: 8079
+#    ip: zxb-user-thrift-service
+    #    port: 8079
+    ip: lb.zxb.com
+    port: 8001

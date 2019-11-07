@@ -6,7 +6,8 @@ spring:
     application:
       name: course-consumer-service
     registry:
-      address: zookeeper://${zookeeper.address}:2181
+      address: zookeeper://192.168.1.119:2181
+#      address: zookeeper://${zookeeper.address}:2181
     protocol:
       port: 20880
 server:
@@ -15,5 +16,6 @@ server:
 user:
   edge:
     service:
-      addr: zxb-user-edge-service:8082
+#      addr: zxb-user-edge-service:8082
+      addr: lb.zxb.com:8003
 

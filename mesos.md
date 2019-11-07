@@ -20,7 +20,7 @@
     拉取镜像：docker pull mesosphere/mesos-slave
     docker运行脚本：
         #!/bin/bash
-        docker run -d --net=host --privileged \
+        docker run -d --net=host --pid=host --privileged \
           --hostname=192.168.1.141 \
           -e MESOS_PORT=5051 \
           -e MESOS_MASTER=zk://192.168.1.119:2181/mesos \
@@ -53,4 +53,12 @@
     	 -e PORTS=9090 mesosphere/marathon-lb:v1.14.1 sse \
      	 --group external \
     	 --marathon http://192.168.1.140:8080
-    页面访问：http://192.168.1.140:9090/haproxy?stats
+    页面访问：http://192.168.1.140:9090/haproxy?stats ;
+    因为marathon-lb添加了外部group，所以marathon的应用都需要加上Label配置：HAPROXY_GROUP=external
+5、如果API-Gateway无法访问绑定到域名，需要安装在marathon-lb那台主机上安装dns：yum install dnsmasq
+    配置mesos-slave主机的docker配置：
+        {
+          "registry-mirrors": ["http://hub-mirror.c.163.com"],
+          "insecure-registries": ["192.168.1.139:8080"],
+          "dns": ["192.168.1.140"]
+        }
