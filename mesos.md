@@ -45,6 +45,7 @@
                  --master zk://192.168.1.119:2181/mesos \ 
         	 --zk zk://192.168.1.119:2181/marathon
     页面访问：http://192.168.1.140:8080/
+    marathon是服务部署和服务运行的平台，服务都部署在marathon上，marathon-lb从marathon获取服务，来添加到HAProxy里
 4、Mesos-marathon-lb（marathon负载均衡以及服务发现）
     拉取镜像：docker pull mesosphere/marathon-lb:v1.14.1
     docker运行脚本：
@@ -62,3 +63,6 @@
           "insecure-registries": ["192.168.1.139:8080"],
           "dns": ["192.168.1.140"]
         }
+6、Marathon新建应用，如果是通过Marathon-lb来做负载均衡和服务发现必须添加labels HAPROXY_GROUP=external，否则Marathon-lb
+    将无法发现服务，添加了健康检查TCP会存在问题，当执行检查的时候Marathon-lb会认为这个服务监控检查失败，会kill掉服务，而
+    Marathon管理界面显示正常，这是个坑。用http或是不检查就不会存在问题
