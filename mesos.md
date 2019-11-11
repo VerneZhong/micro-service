@@ -65,4 +65,4 @@
         }
 6、Marathon新建应用，如果是通过Marathon-lb来做负载均衡和服务发现必须添加labels HAPROXY_GROUP=external，否则Marathon-lb
     将无法发现服务，添加了健康检查TCP会存在问题，当执行检查的时候Marathon-lb会认为这个服务监控检查失败，会kill掉服务，而
-    Marathon管理界面显示正常，这是个坑。用http或是不检查就不会存在问题
+    Marathon管理界面显示正常，这是个坑。用http或是不检查就不会存在问题。

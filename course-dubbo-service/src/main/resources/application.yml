@@ -31,7 +31,7 @@ server:
 thrift:
   user:
 #    ip: 127.0.0.1
-#    ip: zxb-user-thrift-service
+    ip: zxb-user-thrift-service
     #    port: 8079
-    ip: lb.zxb.com
+#    ip: lb.zxb.com
     port: 8001
