@@ -14,14 +14,15 @@ thrift:
   user:
     #    ip: 127.0.0.1
     # docker-compose 方式
-    ip: zxb-user-thrift-service
+#    ip: zxb-user-thrift-service
+    ip: user-service
     #    port: 8080
     # marathon-lb
     #    ip: lb.zxb.com
     port: 8001
   message:
     #    ip: 127.0.0.1
-    ip: zxb-message-thrift-service
+    ip: message-service
     #    port: 8081
     # marathon-lb
     #    ip: lb.zxb.com

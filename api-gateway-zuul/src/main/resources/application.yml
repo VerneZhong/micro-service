@@ -6,9 +6,11 @@ zuul:
   routes:
     course:
       path: /course/**
-      url: http://zxb-course-edge-service:8084/course/
+#      url: http://zxb-course-edge-service:8084/course/
+      url: http://course-service:8084/course/
 #      url: http://lb.zxb.com:8004/course/
     user:
       path: /user/**
-      url: http://zxb-user-edge-service:8082/user/
+#      url: http://zxb-user-edge-service:8082/user/
+      url: http://user-service:8082/user/
 #      url: http://lb.zxb.com:8003/user/

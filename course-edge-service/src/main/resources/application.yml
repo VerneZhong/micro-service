@@ -16,6 +16,7 @@ server:
 user:
   edge:
     service:
-      addr: zxb-user-edge-service:8082
+#      addr: zxb-user-edge-service:8082
+      addr: user-service:8082
 #      addr: lb.zxb.com:8003
 
