@@ -34,7 +34,7 @@
         <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
-        <thrift.version>0.12.0</thrift.version>
+        <thrift.version>0.21.0</thrift.version>
         <dubbo-spring-boot.version>2.0.0</dubbo-spring-boot.version>
         <zookeeper.version>3.5.6</zookeeper.version>
         <zkclient.version>0.11</zkclient.version>
